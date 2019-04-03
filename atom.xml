@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://newhanly.com/"/>
-  <updated>2019-04-03T02:44:48.240Z</updated>
+  <updated>2019-04-03T04:40:04.032Z</updated>
   <id>http://newhanly.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>一级域名跳转二级域名实现</title>
+    <link href="http://newhanly.com/2019/04/03/cloudflare301/"/>
+    <id>http://newhanly.com/2019/04/03/cloudflare301/</id>
+    <published>2019-04-03T04:40:04.032Z</published>
+    <updated>2019-04-03T04:40:04.032Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="关于域名跳转"><a href="#关于域名跳转" class="headerlink" title="关于域名跳转"></a>关于域名跳转</h4><p>你是否在访问某些网站时发现直接访问一级域名即可，例如本站的网址，你可以访问blog.newhanly.com，也可以直接访问newhanly.com。那么这是如何实现的呢，301跳转是其中一种方法，客户端在向服务器请求资源时得到一个状态码，指引客户端到一个其它的网页。</p><h4 id="关于CloudFlare"><a href="#关于CloudFlare" class="headerlink" title="关于CloudFlare"></a>关于CloudFlare</h4><p>CloudFlare是全球最大的CDN和DNS服务商之一，我们目前需要的301重定向服务也是由CloudFlare实现的。</p><h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><ul><li><p>打开CloudFlare官网 <a href="https://www.cloudflare.com/" target="_blank" rel="noopener">https://www.cloudflare.com/</a> 。注册并登陆，在Home页面点击AddWebsite，添加你的顶级域名，如果只有一个网页需要跳转，选择FREE套餐即可。</p></li><li><p>根据CloudFlare的指引，在你的域名注册商那里把DNS服务商改为CloudFlare提供的域名服务器。</p></li><li><p>在CloudFlare控制面板点击DNS查看DNS记录，确保你的一级域名有有效的解析地址，建议<code>1.1.1.1</code>。</p></li><li><p>同样在控制面板，有一个Page Rules选项，在该选项下点击Crate Page Rule，填写一级域名，例如<code>http://newhanly.com/</code>，点击Add a Setting，依次选择Forwarding URL，301-Permanent Redirect，在下发框填入需要转发到的域名，例如<code>https://blog.newhanly.com</code>，最后点击Save and Deploy即可。<br><img src="https://raw.githubusercontent.com/NewHanly/newhanly.github.io/master/img/301set.jpg" alt></p></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h4 id=&quot;关于域名跳转&quot;&gt;&lt;a href=&quot;#关于域名跳转&quot; class=&quot;headerlink&quot; title=&quot;关于域名跳转&quot;&gt;&lt;/a&gt;关于域名跳转&lt;/h4&gt;&lt;p&gt;你是否在访问某些网站时发现直接访问一级域名即可，例如本站的网址，你可以访问blog.newhanly.com
+      
+    
+    </summary>
+    
+    
+      <category term="CloudFlare" scheme="http://newhanly.com/tags/CloudFlare/"/>
+    
+      <category term="301重定向" scheme="http://newhanly.com/tags/301%E9%87%8D%E5%AE%9A%E5%90%91/"/>
+    
+      <category term="域名跳转" scheme="http://newhanly.com/tags/%E5%9F%9F%E5%90%8D%E8%B7%B3%E8%BD%AC/"/>
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>
