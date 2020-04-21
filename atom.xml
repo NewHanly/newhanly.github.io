@@ -75,11 +75,45 @@
   </entry>
   
   <entry>
+    <title>简单理解iptables</title>
+    <link href="http://newhanly.com/2019/04/21/iptables/"/>
+    <id>http://newhanly.com/2019/04/21/iptables/</id>
+    <published>2019-04-21T11:40:23.000Z</published>
+    <updated>2020-04-21T09:03:42.971Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="表"><a href="#表" class="headerlink" title="表"></a>表</h3><p>一开头线扔出四张表raw、mangle、nat、filter</p><table><thead><tr><th>表</th><th>功能</th></tr></thead><tbody><tr><td>mangle</td><td>拆解报文做出修改，重新封装</td></tr><tr><td>nat</td><td>网络地址转换功能</td></tr><tr><td>filter</td><td>过滤功能，防火墙</td></tr><tr><td>raw</td><td>关闭nat表上启用的连接追踪机制</td></tr></tbody></table><p>查看表的规则<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -t filter -L</span><br></pre></td></tr></table></figure></p><p>其它表同理，实际使用中默认查看的是filter表，因此查看filter表的规则也可以简写为<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -L</span><br></pre></td></tr></table></figure></p><p>命令其它可选参数，<code>-v</code>更详细的规则信息，<code>-n</code>不解析地址</p><h3 id="链"><a href="#链" class="headerlink" title="链"></a>链</h3><p>简单的说“链”就是对一些行为相似的数据包采用的规则集合</p><table><thead><tr><th>链</th><th>匹配的报文</th><th>能使用的表</th></tr></thead><tbody><tr><td>INPUT</td><td>处理输入数据包</td><td>mangle、nat*、filter</td></tr><tr><td>OUTPUT</td><td>处理输出数据包</td><td>raw、mangle、nat、filter</td></tr><tr><td>FORWARD</td><td>处理转发数据包</td><td>mangle、filter</td></tr><tr><td>PREROUTING</td><td>用于目标地址转换（DNAT）</td><td>raw、mangle、nat</td></tr><tr><td>POSTROUTING</td><td>用于源地址转换（SNAT）</td><td>mangle、nat</td></tr></tbody></table><blockquote><p>某些系统规定nat表中的规则不能用于INPUT链</p></blockquote><p>查看链里的规则<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -L INPUT</span><br></pre></td></tr></table></figure></p><p>其它链同理</p><h3 id="匹配"><a href="#匹配" class="headerlink" title="匹配"></a>匹配</h3><p>基本匹配规则<br>| 参数 | 内容 |<br>| — | — |<br>| s  | 匹配来源IP地址，“!”表示除外 |<br>| d | 匹配目标IP地址 |<br>| i | 网卡名，匹配从该网卡流入的数据包 |<br>| o | 网卡名，匹配从该网卡流出的数据包 |<br>| p | 匹配协议,如tcp,udp,icmp |</p><h3 id="动作"><a href="#动作" class="headerlink" title="动作"></a>动作</h3><table><thead><tr><th>参数</th><th>动作</th></tr></thead><tbody><tr><td>ACCEPT</td><td>接受</td></tr><tr><td>REJECT</td><td>拒绝</td></tr><tr><td>DROP</td><td>丢弃数据包</td></tr><tr><td>RETURN</td><td>数据包不继续执行该链后面的命令</td><td>ALL</td></tr><tr><td>REDIRECT</td><td>转发(仅用于nat表)</td></tr></tbody></table>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;表&quot;&gt;&lt;a href=&quot;#表&quot; class=&quot;headerlink&quot; title=&quot;表&quot;&gt;&lt;/a&gt;表&lt;/h3&gt;&lt;p&gt;一开头线扔出四张表raw、mangle、nat、filter&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;表&lt;/th&gt;
+&lt;th&gt;功能&lt;
+      
+    
+    </summary>
+    
+      <category term="Linux运维" scheme="http://newhanly.com/categories/Linux%E8%BF%90%E7%BB%B4/"/>
+    
+    
+      <category term="Linux" scheme="http://newhanly.com/tags/Linux/"/>
+    
+      <category term="运维" scheme="http://newhanly.com/tags/%E8%BF%90%E7%BB%B4/"/>
+    
+      <category term="网络" scheme="http://newhanly.com/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
+  
+  <entry>
     <title>一级域名跳转二级域名实现</title>
     <link href="http://newhanly.com/2019/04/03/cloudflare301/"/>
     <id>http://newhanly.com/2019/04/03/cloudflare301/</id>
     <published>2019-04-03T11:20:25.000Z</published>
-    <updated>2020-04-20T09:17:37.748Z</updated>
+    <updated>2020-04-21T09:02:24.066Z</updated>
     
     <content type="html"><![CDATA[<h4 id="关于域名跳转"><a href="#关于域名跳转" class="headerlink" title="关于域名跳转"></a>关于域名跳转</h4><p>你是否在访问某些网站时发现直接访问一级域名即可，例如本站的网址，你可以访问blog.newhanly.com，也可以直接访问newhanly.com。那么这是如何实现的呢，301跳转是其中一种方法，客户端在向服务器请求资源时得到一个状态码，指引客户端到一个其它的网页。</p><h4 id="关于CloudFlare"><a href="#关于CloudFlare" class="headerlink" title="关于CloudFlare"></a>关于CloudFlare</h4><p>CloudFlare是全球最大的CDN和DNS服务商之一，我们目前需要的301重定向服务也是由CloudFlare实现的。</p><h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><ul><li><p>打开CloudFlare官网 <a href="https://www.cloudflare.com/" target="_blank" rel="noopener">https://www.cloudflare.com/</a> 。注册并登陆，在Home页面点击AddWebsite，添加你的顶级域名，如果只有一个网页需要跳转，选择FREE套餐即可。</p></li><li><p>根据CloudFlare的指引，在你的域名注册商那里把DNS服务商改为CloudFlare提供的域名服务器。</p></li><li><p>在CloudFlare控制面板点击DNS查看DNS记录，确保你的一级域名有有效的解析地址，建议<code>1.1.1.1</code>。</p></li><li><p>同样在控制面板，有一个Page Rules选项，在该选项下点击Crate Page Rule，填写一级域名，例如<code>http://newhanly.com/</code>，点击Add a Setting，依次选择Forwarding URL，301-Permanent Redirect，在下发框填入需要转发到的域名，例如<code>https://blog.newhanly.com</code>，最后点击Save and Deploy即可。<br><img src="https://raw.githubusercontent.com/NewHanly/newhanly.github.io/master/img/301set.png" width="60%" height="60%"></p></li></ul>]]></content>
     
@@ -95,11 +129,11 @@
       <category term="网络技术" scheme="http://newhanly.com/categories/%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF/"/>
     
     
+      <category term="运维" scheme="http://newhanly.com/tags/%E8%BF%90%E7%BB%B4/"/>
+    
       <category term="CloudFlare" scheme="http://newhanly.com/tags/CloudFlare/"/>
     
-      <category term="301重定向" scheme="http://newhanly.com/tags/301%E9%87%8D%E5%AE%9A%E5%90%91/"/>
-    
-      <category term="域名跳转" scheme="http://newhanly.com/tags/%E5%9F%9F%E5%90%8D%E8%B7%B3%E8%BD%AC/"/>
+      <category term="域名" scheme="http://newhanly.com/tags/%E5%9F%9F%E5%90%8D/"/>
     
   </entry>
   
