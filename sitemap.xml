@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://newhanly.com/2020/04/28/clash/</loc>
+    
+    <lastmod>2020-04-28T03:29:12.552Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://newhanly.com/2020/04/21/iptables/</loc>
     
-    <lastmod>2020-04-21T09:12:03.784Z</lastmod>
+    <lastmod>2020-04-28T02:56:47.696Z</lastmod>
     
   </url>
   
@@ -44,14 +51,14 @@
   </url>
   
   <url>
-    <loc>http://newhanly.com/search/index.html</loc>
+    <loc>http://newhanly.com/about/index.html</loc>
     
     <lastmod>2020-04-16T05:46:26.784Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://newhanly.com/about/index.html</loc>
+    <loc>http://newhanly.com/search/index.html</loc>
     
     <lastmod>2020-04-16T05:46:26.784Z</lastmod>
     
